@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="泰州学院宣传网页：省属公办普通本科高校，扎根泰州，服务区域发展。" />
+    <title>泰州学院 | 敦尚行实 明体达用</title>
+    <link rel="preconnect" href="https://www.tzu.edu.cn" />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #102033;
+        --muted: #637083;
+        --red: #b51f2a;
+        --red-deep: #78141d;
+        --gold: #c99b42;
+        --green: #0f6b62;
+        --blue: #145f88;
+        --paper: #f8f3e9;
+        --mist: #edf6f2;
+        --line: rgba(16, 32, 51, 0.13);
+        --shadow: 0 24px 80px rgba(16, 32, 51, 0.18);
+        font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          linear-gradient(180deg, #fffdf8 0%, #f7fbfb 45%, #fffdf8 100%);
+      }
+      a { color: inherit; text-decoration: none; }
+      .site-header {
+        position: fixed; inset: 0 0 auto; z-index: 10; display: flex; align-items: center;
+        justify-content: space-between; gap: 24px; padding: 16px clamp(18px, 4vw, 64px);
+        color: white; background: linear-gradient(180deg, rgba(18, 32, 51, 0.72), rgba(18, 32, 51, 0));
+        transition: background 0.25s ease, box-shadow 0.25s ease;
+      }
+      .site-header.is-solid {
+        background: rgba(255, 253, 248, 0.94); color: var(--ink);
+        box-shadow: 0 8px 30px rgba(18, 32, 51, 0.1); backdrop-filter: blur(18px);
+      }
+      .brand { display: flex; align-items: center; gap: 12px; min-width: 170px; }
+      .brand-mark {
+        display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid currentColor;
+        border-radius: 50%; font-weight: 800; font-size: 13px;
+      }
+      .brand strong, .brand small { display: block; }
+      .brand small { opacity: 0.78; font-size: 11px; margin-top: 2px; }
+      nav { display: flex; align-items: center; gap: 8px; font-size: 15px; }
+      nav a { opacity: 0.9; padding: 9px 13px; border-radius: 999px; }
+      nav a:hover { opacity: 1; }
+      nav a:hover, .site-header.is-solid nav a:hover { background: rgba(255, 255, 255, 0.16); }
+      .site-header.is-solid nav a:hover { background: rgba(181, 31, 42, 0.08); color: var(--red); }
+      .hero { position: relative; min-height: 96vh; display: grid; align-items: end; overflow: hidden; background: var(--ink); }
+      .hero picture, .hero img { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .hero img { object-fit: cover; filter: saturate(1.04) contrast(1.03); }
+      .hero::after {
+        content: ""; position: absolute; inset: 0;
+        background: radial-gradient(circle at 18% 28%, rgba(201, 155, 66, 0.24), transparent 28%),
+          linear-gradient(90deg, rgba(9, 18, 31, 0.88) 0%, rgba(9, 18, 31, 0.55) 46%, rgba(9, 18, 31, 0.08) 100%),
+          linear-gradient(0deg, rgba(9, 18, 31, 0.78) 0%, rgba(9, 18, 31, 0) 50%);
+      }
+      .hero-overlay { position: relative; z-index: 1; width: min(1160px, calc(100% - 36px)); margin: 0 auto; padding: 136px 0 214px; color: white; }
+      .eyebrow { margin: 0 0 14px; color: var(--gold); font-weight: 800; letter-spacing: 0; text-transform: uppercase; }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { margin-bottom: 18px; font-size: clamp(58px, 8vw, 118px); line-height: 0.95; text-shadow: 0 12px 38px rgba(0, 0, 0, 0.35); }
+      h2 { margin-bottom: 18px; font-size: clamp(30px, 4vw, 54px); line-height: 1.12; }
+      h3 { font-size: 22px; margin-bottom: 10px; }
+      .lead { max-width: 650px; color: rgba(255, 255, 255, 0.88); font-size: clamp(18px, 2vw, 24px); line-height: 1.75; }
+      .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+      .hero-badges span {
+        padding: 8px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(10px);
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .hero-actions, .contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+      .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border: 1px solid transparent; border-radius: 6px; font-weight: 800; }
+      .button.primary { background: var(--red); color: white; }
+      .button.ghost { border-color: rgba(255, 255, 255, 0.58); color: white; }
+      .button.dark { background: var(--ink); color: white; }
+      .button.light { background: white; color: var(--ink); border-color: var(--line); }
+      .button:hover { transform: translateY(-1px); }
+      .hero-stats { position: absolute; z-index: 2; right: clamp(18px, 4vw, 64px); bottom: 34px; left: clamp(18px, 4vw, 64px); display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; overflow: hidden; border-radius: 8px; box-shadow: var(--shadow); border: 1px solid rgba(255, 255, 255, 0.34); }
+      .hero-stats div { min-height: 118px; padding: 24px; background: rgba(255, 253, 248, 0.95); }
+      .hero-stats strong { display: block; color: var(--red); font-size: clamp(28px, 4vw, 46px); line-height: 1; }
+      .hero-stats span { display: block; margin-top: 10px; color: var(--muted); font-weight: 700; }
+      .section { padding: clamp(64px, 9vw, 116px) clamp(18px, 5vw, 78px); }
+      .section-title { max-width: 780px; margin-bottom: 38px; }
+      .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; max-width: 1080px; font-size: 19px; line-height: 1.9; color: var(--muted); }
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 38px;
+        max-width: 1120px;
+      }
+      .timeline div {
+        min-height: 126px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-top: 4px solid var(--red);
+        background: rgba(255, 255, 255, 0.78);
+        box-shadow: 0 14px 40px rgba(16, 32, 51, 0.07);
+      }
+      .timeline strong { display: block; color: var(--red); font-size: 30px; margin-bottom: 8px; }
+      .timeline span { color: var(--muted); line-height: 1.7; }
+      .metrics { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; padding-top: 0; }
+      .metric { min-height: 168px; padding: 26px 20px; background: linear-gradient(180deg, #fffaf0, var(--paper)); border: 1px solid rgba(201, 155, 66, 0.26); border-top: 4px solid var(--gold); box-shadow: 0 16px 44px rgba(16, 32, 51, 0.07); }
+      .metric span { display: block; color: var(--blue); font-size: clamp(28px, 3.2vw, 44px); font-weight: 900; }
+      .metric p { margin: 10px 0 0; color: var(--muted); font-weight: 700; }
+      .feature-band { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px, 6vw, 86px); background: linear-gradient(135deg, #edf7f4 0%, #fff8eb 100%); }
+      .feature-band > div:first-child p:last-child { color: var(--muted); font-size: 18px; line-height: 1.9; }
+      .feature-list { display: grid; gap: 14px; }
+      .feature-list article { padding: 26px; border-left: 5px solid var(--red); background: rgba(255, 255, 255, 0.84); box-shadow: 0 14px 44px rgba(16, 32, 51, 0.08); }
+      .feature-list p { color: var(--muted); line-height: 1.75; margin-bottom: 0; }
+      .programs { background: #fffdf8; }
+      .program-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+      .program-grid article {
+        min-height: 150px;
+        padding: 24px;
+        color: white;
+        background: linear-gradient(135deg, var(--blue), var(--green));
+        border-radius: 8px;
+        box-shadow: 0 18px 48px rgba(16, 32, 51, 0.14);
+      }
+      .program-grid article:nth-child(2) { background: linear-gradient(135deg, var(--red), var(--red-deep)); }
+      .program-grid article:nth-child(3) { background: linear-gradient(135deg, #8a6421, var(--gold)); }
+      .program-grid article:nth-child(4) { background: linear-gradient(135deg, #24384f, #46677e); }
+      .program-grid p { margin: 0; color: rgba(255, 255, 255, 0.84); line-height: 1.7; }
+      .campus { background: #fff; }
+      .gallery { display: grid; grid-template-columns: 1.15fr 0.85fr; grid-template-rows: 280px 280px; gap: 16px; }
+      .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+      .gallery img:first-child { grid-row: span 2; }
+      .contact { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; background: linear-gradient(135deg, var(--red), #7f1420); color: white; }
+      .contact .eyebrow { color: #ffe0a4; }
+      .contact p { color: rgba(255, 255, 255, 0.84); line-height: 1.9; }
+      footer { padding: 28px clamp(18px, 5vw, 78px); color: rgba(255, 255, 255, 0.72); background: #101827; font-size: 14px; line-height: 1.7; }
+      footer p { margin: 0 0 6px; }
+      @media (max-width: 920px) {
+        .site-header { align-items: flex-start; }
+        nav { display: none; }
+        .hero-stats, .metrics, .feature-band, .contact, .timeline, .program-grid { grid-template-columns: 1fr 1fr; }
+        .intro-grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 640px) {
+        .site-header { padding: 12px 16px; }
+        .brand-mark { width: 40px; height: 40px; font-size: 12px; }
+        .brand strong { font-size: 16px; }
+        .hero { min-height: auto; }
+        .hero-overlay { width: calc(100% - 32px); padding: 104px 0 28px; }
+        .hero-badges span { font-size: 12px; padding: 7px 10px; }
+        h1 { font-size: clamp(48px, 18vw, 76px); }
+        h2 { font-size: 30px; }
+        .lead { font-size: 17px; line-height: 1.68; }
+        .hero-stats {
+          position: relative;
+          left: auto;
+          right: auto;
+          bottom: auto;
+          width: calc(100% - 32px);
+          margin: 0 auto 18px;
+          grid-template-columns: 1fr 1fr;
+        }
+        .hero-stats div { min-height: 94px; padding: 18px; }
+        .hero-stats strong { font-size: 30px; }
+        .hero-stats span { font-size: 13px; }
+        .section { padding: 58px 16px; }
+        .hero-stats, .metrics, .feature-band, .contact, .gallery, .timeline, .program-grid { grid-template-columns: 1fr; }
+        .gallery { grid-template-rows: repeat(3, 220px); }
+        .gallery img:first-child { grid-row: auto; }
+        .contact-actions { width: 100%; }
+        .button { width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <a class="brand" href="#top" aria-label="泰州学院首页">
+        <span class="brand-mark">TZU</span>
+        <span>
+          <strong>泰州学院</strong>
+          <small>Taizhou University</small>
+        </span>
+      </a>
+      <nav aria-label="主导航">
+        <a href="#about">学校概况</a>
+        <a href="#strength">办学实力</a>
+        <a href="#campus">校园风光</a>
+        <a href="#contact">联系招生</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <picture>
+          <source media="(max-width: 720px)" srcset="https://www.tzu.edu.cn/_upload/article/images/e4/23/1a7c6eae4190978fdc6480078e14/03ab2312-013b-42dd-81f5-9c71b81d35ac.jpg" />
+          <img src="https://www.tzu.edu.cn/_upload/article/images/e4/23/1a7c6eae4190978fdc6480078e14/7b838de8-d618-4147-8b2d-120081656675.jpg" alt="泰州学院校园风光" />
+        </picture>
+        <div class="hero-overlay">
+          <p class="eyebrow">江苏省属公办普通本科高校</p>
+          <h1>泰州学院</h1>
+          <p class="lead">敦尚行实，明体达用。扎根泰州、深耕应用型本科教育，培养面向区域经济社会发展的高素质人才。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://www.tzu.edu.cn/" target="_blank" rel="noreferrer">访问学校官网</a>
+            <a class="button ghost" href="https://zs.tzu.edu.cn/" target="_blank" rel="noreferrer">招生信息网</a>
+          </div>
+        </div>
+        <div class="hero-stats" aria-label="学校关键数据">
+          <div><strong>1941</strong><span>办学源流</span></div>
+          <div><strong>14800+</strong><span>全日制在校生</span></div>
+          <div><strong>37</strong><span>本科专业</span></div>
+          <div><strong>356</strong><span>校外实习实训基地</span></div>
+        </div>
+      </section>
+
+      <section class="section intro" id="about">
+        <div class="section-title">
+          <p class="eyebrow">About TZU</p>
+          <h2>一所与城市共同生长的应用型本科高校</h2>
+        </div>
+        <div class="intro-grid">
+          <p>泰州学院前身可追溯至 1941 年成立的泰兴乡村师范和 1952 年的苏北泰州师范学校。学校于 2013 年升格为公办本科高校，2017 年获批学士学位授予单位，2023 年 12 月划转为省属公办普通本科高等学校。</p>
+          <p>学校现有济川、泰兴两个校区，设有 13 个教学单位，本科专业覆盖 8 个学科门类。80 余年来，学校已培养 10 多万名各级各类优秀人才。</p>
+        </div>
+      </section>
+
+      <section class="section metrics" id="strength">
+        <div class="metric"><span>800+</span><p>教职工</p></div>
+        <div class="metric"><span>274</span><p>高级职称教师</p></div>
+        <div class="metric"><span>249</span><p>博士学位教师</p></div>
+        <div class="metric"><span>180</span><p>实验室实训室</p></div>
+        <div class="metric"><span>129.63万</span><p>纸质图书</p></div>
+        <div class="metric"><span>1.43亿</span><p>教学科研仪器设备总值</p></div>
+      </section>
+
+      <section class="section feature-band">
+        <div>
+          <p class="eyebrow">Education & Research</p>
+          <h2>以应用型培养连接产业与未来</h2>
+          <p>学校拥有省重点建设学科 5 个、省品牌专业 3 个、省一流本科专业 12 个、国家级一流课程 2 门，并与企事业单位合作建立校外实习实训基地 356 个。</p>
+        </div>
+        <div class="feature-list">
+          <article>
+            <h3>实践平台</h3>
+            <p>省重点建设实验室、省工程研究中心、省基础课实验教学示范中心等平台支撑教学科研。</p>
+          </article>
+          <article>
+            <h3>创新成果</h3>
+            <p>升本以来获批国家级项目 36 项、省部级项目 89 项，新增专利 389 项。</p>
+          </article>
+          <article>
+            <h3>就业质量</h3>
+            <p>近三年毕业生平均年终毕业去向落实率 95.31%，就业创业工作获省级肯定。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section campus" id="campus">
+        <div class="section-title">
+          <p class="eyebrow">Campus View</p>
+          <h2>水城文脉里的现代校园</h2>
+        </div>
+        <div class="gallery">
+          <img src="https://www.tzu.edu.cn/_upload/article/images/e4/23/1a7c6eae4190978fdc6480078e14/c0fd3a85-2fad-4f0d-8e1c-c509bfb9e005.jpg" alt="泰州学院校园建筑" />
+          <img src="https://www.tzu.edu.cn/_upload/article/images/e4/23/1a7c6eae4190978fdc6480078e14/e350056e-25f4-47b9-b053-7a5e1e62ba49.jpg" alt="泰州学院校园景观" />
+          <img src="https://www.tzu.edu.cn/_upload/article/images/e4/23/1a7c6eae4190978fdc6480078e14/4f7602d8-d49c-4580-b651-58f24e75829a.jpg" alt="泰州学院校园道路" />
+        </div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>了解泰院，从这里开始</h2>
+          <p>地址：江苏省泰州市济川东路 93 号<br />邮编：225300<br />邮箱：tzxy@tzu.edu.cn</p>
+        </div>
+        <div class="contact-actions">
+          <a class="button primary" href="tel:052386664242">招生电话 0523-86664242</a>
+          <a class="button dark" href="tel:052380769090">招生电话 0523-80769090</a>
+          <a class="button light" href="https://www.tzu.edu.cn/" target="_blank" rel="noreferrer">www.tzu.edu.cn</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>数据来源：泰州学院官网《学校简介》（2026 年 2 月）、学校官网“校园风光”栏目。图片版权归泰州学院所有。</p>
+      <p>本页面为静态宣传页，可直接部署至 Nginx、GitHub Pages、Netlify、Vercel 或任意静态空间。</p>
+    </footer>
+
+    <script>
+      const header = document.querySelector(".site-header");
+      const updateHeader = () => {
+        header.classList.toggle("is-solid", window.scrollY > 80);
+      };
+      window.addEventListener("scroll", updateHeader, { passive: true });
+      updateHeader();
+    </script>
+  </body>
+</html>
